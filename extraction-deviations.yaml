@@ -215,6 +215,26 @@ deviations:
         what says so. Without it the two halves look like independent findings, and a
         meta-analysis that counts both counts one sample twice.
 
+  - id: language-is-filled-from-pubmed-onto-the-record
+    operation: add_slot
+    class: study.Study
+    slot: language
+    why: >-
+      The same case as `study_type`, filled by the same call: storage marks it
+      `deterministic` so the projection drops it, and the code that fills it runs on the
+      extraction side. At least six of the benchmark's sixteen meta-analyses state "English
+      language" as an inclusion criterion and no slot held it, so the criterion could not be
+      written at all. Measured over 1,804 records the field excludes one paper, which is the
+      point: a criterion that is stated should be expressible even where it is nearly inert,
+      and the alternative is a query that silently ignores it.
+    definition:
+      range: string
+      multivalued: true
+      description: >-
+        Languages of this article, as the E-utilities API reports them -- PubMed's
+        three-letter codes, `eng` and the rest. Filled by `pondie.extraction.pubmed`
+        alongside `study_type`, not read off the paper.
+
   - id: publication-type-is-filled-from-pubmed-onto-the-record
     operation: add_slot
     class: study.Study

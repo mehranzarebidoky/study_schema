@@ -137,6 +137,13 @@ classes:
         multivalued: true
         inlined_as_list: true
         description: Named external datasets used, cited, or made available by the study.
+      language:
+        range: string
+        multivalued: true
+        description: >-
+          Languages of this article, as the E-utilities API reports them -- PubMed's three-letter
+          codes, `eng` and the rest. Filled by `pondie.extraction.pubmed` alongside `study_type`,
+          not read off the paper.
       study_type:
         range: string
         multivalued: true

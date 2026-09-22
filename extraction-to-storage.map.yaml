@@ -58,6 +58,14 @@ derivations:
     transform: generate
   Analysis.id:
     transform: generate
+  Analysis.mirror_of:
+    transform: derive
+    source_representation: sibling_field
+    source_field: Analysis.effect
+    notes: >-
+      Set by the builder on the half of a sign-split contrast it rebuilt: same cells,
+      directions flipped, naming the analysis it reverses. Not extracted, because the
+      paper's prose describes one direction and the other is arithmetic.
   Analysis.statistical_maps:
     transform: api_lookup
     notes: >-
@@ -127,6 +135,11 @@ derivations:
     transform: api_lookup
     notes: 'Publication year for the record''s PMID, from the E-utilities API. Not extracted: a bibliographic
       fact the API states is not one a model should be asked to read off the page.'
+  Study.language:
+    transform: api_lookup
+    notes: 'Article languages for the record''s PMID, from the same E-utilities call that fills
+      `study_type`. Not extracted: what language an article is indexed in is a bibliographic fact
+      the API states, and the text a reader is handed is in one language whatever that fact says.'
   Study.study_type:
     transform: api_lookup
     notes: 'PubMed publication types for the record''s PMID, from the E-utilities API, stored verbatim
@@ -137,6 +150,21 @@ derivations:
     transform: api_lookup
     notes: 'Article title for the record''s PMID, from the E-utilities API. Not extracted: a bibliographic
       fact the API states is not one a model should be asked to read off the page.'
+  Group.is_healthy:
+    transform: derive
+    source_representation: sibling_field
+    source_field: Group.medical_condition
+    notes: >-
+      Set by `pondie.normalization.is_healthy` from `medical_condition`, so the flag cannot
+      contradict the field it summarises. Asked directly, a model answers with the source's
+      wording: 168 groups came back healthy beside a real diagnosis.
+  Group.other_characteristics:
+    transform: derive
+    source_representation: sibling_field
+    source_field: Group.population_characteristics
+    notes: >-
+      The characteristics left over once the vocabulary-backed ones are projected out, kept
+      as free text so nothing a cohort was described by is dropped.
   Table.coordinate_count:
     transform: derive
     source_representation: normalized_table

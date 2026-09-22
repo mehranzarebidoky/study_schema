@@ -167,7 +167,7 @@ classes:
           Deviation is the test, and it is what makes this field worth querying. A study selects its cohort for something; that something is what belongs here. The unremarkable does not: "normal weight", "healthy weight", "typically developing", "right-handed", "no hearing loss" and an ordinary age range describe a cohort that was not selected for anything, and recording them fills the field with the absence of information. If every plausible cohort could carry the value, leave it out.
           **Every other Group slot takes priority.** Nothing here that belongs in `age_mean`, `age_minimum`, `age_maximum`, `age_median`, `sex_distribution`, `gender_distribution`, `handedness_distribution`, `race_distribution`, `ethnicity_distribution`, `education_summary`, `socioeconomic_status_summary`, `medications`, `medication_status`, `recruitment_method`, `species`, `inclusion_criteria`, `exclusion_criteria` or `medical_condition`. "All Caucasian" is `race_distribution`; "children aged 8-11" is `age_minimum` and `age_maximum`; "five participants were female" is `sex_distribution`.
           Not a diagnosis either. Where a trait is also the cohort's condition -- alcohol dependence, obesity as a diagnosed disease -- `medical_condition` takes it alone, which is where a clinician would look.
-          What was screened out is not a characteristic. "Excluding caffeine" in an exclusion list says nothing about caffeine use in the cohort, and `exclusion_criteria` is where these traits used to land.
+          What was screened out is not a characteristic. "Excluding caffeine" in an exclusion list says nothing about caffeine use in the cohort.
       medical_condition:
         range: ExtractedStringList
         description: >-
@@ -222,23 +222,21 @@ classes:
         description: |-
           Where this group's participants came from. `recruited` when they were enrolled for this study and no other source is stated; `public_dataset` when they were drawn from a named public or consortium dataset; `previously_reported` when the same or an overlapping sample was already reported in another publication.
           On the group and not the study, because overlap is routinely partial: a study may scan a fresh patient group against controls taken from an existing dataset, and a study-level flag cannot say which. `Study.external_datasets` remains the place for a named dataset the study as a whole used.
-          A protocol, preprocessing pipeline or analysis "described previously" is a shared METHOD and leaves this `recruited`; so does comparing findings to earlier literature in the discussion. Only a statement that these same people were scanned, studied or reported before counts. Measured on 150 random papers: the value is decidable from a verbatim sentence in 38 of the 40 non-`recruited` cases, and both errors were this confusion, so the warning is the field's own text rather than a note somewhere else.
+          A protocol, preprocessing pipeline or analysis "described previously" is a shared METHOD and leaves this `recruited`; so does comparing findings to earlier literature in the discussion. Only a statement that these same people were scanned, studied or reported before counts, and a source that means it normally says so in one sentence.
           `recruited` is an assertion and not the absence of one. A meta-analysis excluding overlapping samples has to distinguish a study that recruited freshly from one nobody checked, and an unfilled field cannot.
       sample_source_reference:
         range: ExtractedString
         description: >-
-          The dataset name, or the prior publication as the source cites it -- `Doehrmann
-          et al., 2013`, `Bryant et al. [17]`, `NCT01281228`. Present in 36 of 40 measured
-          cases. Without it the overlap is known and not actionable: deciding whether two
-          papers are one independent sample needs the identity of the other one.
+          The dataset name, or the prior publication as the source cites it: an author-year
+          citation, a bracketed reference number, or a trial registration number, copied as
+          written. Without it the overlap is known but not actionable -- deciding whether
+          two papers are one independent sample needs the identity of the other one.
       sample_overlap_count:
         range: ExtractedInteger
         description: >-
-          How many of this group were in that prior report, when the source says. Stated in
-          about half of measured cases ("GM volume data from 14 of these 21 PTSD participants
-          has been previously reported"). It is the difference between two papers being one
-          sample and their sharing part of one, which is the difference between dropping a
-          study and down-weighting it.
+          How many of this group were in that prior report, when the source says so. It is
+          the difference between two papers being one sample and their sharing part of one,
+          which is the difference between dropping a study and down-weighting it.
       is_healthy:
         range: ExtractedBoolean
         description: >-

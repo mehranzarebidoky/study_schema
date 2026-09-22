@@ -33,7 +33,16 @@ classes:
         any_of:
           - range: Allocation
           - range: string
-        description: How participants came to be in the arm they were in.
+        description: >-
+          How participants came to be in the arm they were in.
+
+          Its own vocabulary, and not its neighbour's. A study with no arms takes
+          `not_applicable` here -- "nothing was administered, so allocation does not
+          apply" -- and says `observational_cohorts` in `assignment_structure`. Writing
+          `observational_cohorts` into this slot was measured on 4 of 5 freshly extracted
+          observational papers: the value is accepted, because the vocabulary is open, and
+          it answers a different question than the one asked. This slot is the only record
+          of whether anything was administered at all.
       assignment_structure:
         in_subset: [mvp, model_extracted]
         any_of:

@@ -179,7 +179,7 @@ classes:
       references:
         range: ExtractedStringList
         description: |-
-          Works the source cites for this task, exactly as it writes them -- `Hariri et al., 2002a`, `(Delgado et al., 2000)`, `[14]`. Copy the in-text citation; do not resolve, expand or look it up.
+          Works the source cites for this task, exactly as it writes them: an author-year citation or a bracketed reference number, kept in the source's own punctuation. Copy the in-text citation; do not resolve, expand or look it up.
           Multivalued -- a task may cite the paradigm's origin, an adaptation, and the stimulus set separately. Empty when the source cites nothing for the task.
       stimuli:
         range: ExtractedStringList
@@ -191,7 +191,7 @@ classes:
         range: ExtractedStimulusModalityList
         description: |-
           The sensory channel the stimuli were delivered through. Multivalued because a paradigm may use more than one -- a photograph with a spoken label.
-          Often not stated in those words: a source naming IAPS, NimStim, Ekman faces or film clips has said `visual` without using the word. Inferring it from such a cue is intended, and the cue is what belongs in the evidence -- not the whole methods section. Screening criteria ask about stimulus modality routinely ("the emotional stimuli are VISUAL"), and against a free-text `stimuli` field that question cannot be answered.
+          Often not stated in those words: a source naming IAPS, NimStim, Ekman faces or film clips has said `visual` without using the word. Inferring it from such a cue is intended, and the cue is what belongs in the evidence -- not the whole methods section.
       response_modality:
         range: ExtractedResponseModalityList
         description: >-
@@ -226,9 +226,8 @@ classes:
         range: ExtractedConditionKind
         description: >-
           What kind of state this was: an active task state, a rest or fixation period, or
-          a state the source calls a control or neutral condition. Asked as its own field
-          because it was asked for in prose before and arrived in under half of conditions,
-          and because a consumer that has to read it out of a description cannot rely on it.
+          a state the source calls a control or neutral condition. A field of its own rather
+          than a phrase in `description`, which a consumer cannot reliably read it out of.
       description:
         range: ExtractedString
         description: |-

@@ -90,6 +90,21 @@ classes:
         range: integer
         minimum_value: 1600
         description: Year in which the study was first published or made publicly available.
+      language:
+        in_subset: [mvp, deterministic]
+        range: string
+        multivalued: true
+        description: >-
+          Languages of the article, as the E-utilities API reports them -- the three-letter
+          codes PubMed assigns, `eng` and the rest. Filled from the same `esummary` call
+          that fills `study_type`, and not read off the paper: the text a reader is given
+          is in one language whatever the article is indexed as.
+
+          At least six of the benchmark's sixteen meta-analyses state "English language" as
+          an inclusion criterion, and it was unexpressible. On the 1,804 records measured it
+          excludes exactly one paper, so it buys precision rather than recall; the criterion
+          is stated, so the field states it.
+
       study_type:
         in_subset: [mvp, deterministic]
         any_of:
