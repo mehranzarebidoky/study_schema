@@ -645,10 +645,10 @@ enums:
     permissible_values:
       global_null:
         in_subset: [mvp, model_extracted]
-        description: At least one component effect is present at a voxel (Friston et al.).
+        description: At least one component effect is present at a voxel.
       conjunction_null:
         in_subset: [mvp, model_extracted]
-        description: Every component effect is present at a voxel (Nichols et al.).
+        description: Every component effect is present at a voxel.
 
   ConjunctionImplementation:
     in_subset: [mvp, model_extracted]
@@ -876,13 +876,9 @@ enums:
           of the kinds below. Derived rather than read: a table an `Analysis` names in
           `tables` reports that analysis's result.
 
-          Present because absence could not say it. Absence meant both "this reports results"
-          and "nobody decided", so a reader could not tell a table deliberately left
-          unmarked from one no pass considered -- and a model shown eight kinds of
-          non-analysis and no way to say "it is an analysis" answers with the nearest one.
-          Measured over twelve papers: a repair pass marked 18 of 19 tables, and 16 of those
-          18 were cited by an analysis, which makes the mark wrong by this enum's own
-          definition.
+          Present because absence could not say it: an unmarked table is both one that
+          reports results and one nobody decided about, and a reader shown only the
+          non-analysis kinds has no way to say "it is an analysis".
       region_definitions:
         in_subset: [mvp, model_extracted]
         description: >-

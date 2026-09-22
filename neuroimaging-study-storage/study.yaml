@@ -212,10 +212,9 @@ enums:
     in_subset: [mvp, deterministic]
     description: >-
       PubMed publication types, spelled as the E-utilities API returns them so that a value
-      needs no translation. Listed here are the design-relevant types observed in the
-      development corpus; PubMed also returns funding types such as "Research Support,
-      Non-U.S. Gov't", and the vocabulary is open, so those and any unlisted type pass through
-      verbatim.
+      needs no translation. Only the design-relevant types are listed; PubMed also returns
+      funding and indexing types, and the vocabulary is open, so any unlisted type passes
+      through verbatim.
     permissible_values:
       "Journal Article":
         in_subset: [mvp, deterministic]

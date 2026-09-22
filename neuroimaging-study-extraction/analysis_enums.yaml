@@ -680,10 +680,14 @@ classes:
           - range: string
   ExtractedPrespecification:
     is_a: ExtractedValue
-    description: An ExtractedValue whose value is Prespecification.
+    description: >-
+      An ExtractedValue whose value is Prespecification, or the source's own wording when
+      the vocabulary does not cover it.
     slot_usage:
       value:
-        range: Prespecification
+        any_of:
+          - range: Prespecification
+          - range: string
   ExtractedTermType:
     is_a: ExtractedValue
     description: An ExtractedValue whose value is TermType.

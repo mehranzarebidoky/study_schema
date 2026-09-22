@@ -164,7 +164,7 @@ enums:
           A characteristic participants already had is not an assignment. Splitting a sample
           by diagnosis, exposure or genotype allocates nobody, and the study takes
           `not_applicable` here and `observational_cohorts` for its
-          `assignment_structure`. 569 of 1,817 records read this value the other way.
+          `assignment_structure`.
       single_arm:
         in_subset: [mvp, model_extracted]
         description: >-
@@ -182,12 +182,10 @@ enums:
       How the cohorts a study compares came about. Open vocabulary: write the source's own
       wording in the field when nothing here fits.
 
-      **The first question is whether there are arms at all.** This enum used to ask only
-      which *kind* of arms a study had, and a study with none has to answer something: over
-      1,817 records 1,120 said `parallel` and 956 of those declared no Arm, 93% of them with
-      `allocation` of `non_randomized` or `not_applicable` and cohorts named "healthy
-      controls", "bvFTD" and "smokers". Two cohorts are in parallel in the ordinary sense of
-      the word, so the answer was reasonable and the vocabulary was wrong.
+      **The first question is whether there are arms at all.** Two cohorts are in parallel in
+      the ordinary sense of the word, so a study that assigned nobody to anything reads as
+      `parallel` on the plain meaning and is wrong. `observational_cohorts` is the value for
+      it, and it has no arms.
     permissible_values:
       observational_cohorts:
         in_subset: [mvp, model_extracted]

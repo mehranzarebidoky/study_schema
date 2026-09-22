@@ -51,8 +51,9 @@ classes:
       prespecification:
         range: ExtractedPrespecification
         required: true
-        description: Whether this contrast was planned before the data were seen or arrived
-          at afterwards.
+        description: |-
+          Whether this contrast was planned before the data were seen or arrived at afterwards.
+          Open vocabulary: write the source's own wording in the field when neither value fits. The two are not a spectrum and the words a source uses for them are many -- `post-hoc`, `confirmatory`, `planned`, `hypothesis-driven` -- so a closed range discarded the whole analysis over a synonym. Normalization maps the wording onto the two values.
       interpretations:
         range: ExtractedStringList
         description: >-

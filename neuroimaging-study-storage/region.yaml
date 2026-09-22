@@ -35,14 +35,18 @@ classes:
           needs the original to map from.
       definition_method:
         in_subset: [mvp, model_extracted]
-        range: RegionDefinition
+        any_of:
+          - range: RegionDefinition
+          - range: string
         required: true
         description: >-
           How the region was delimited, which is a statement about independence: one drawn
           from the study's own prior contrast is not independent of an effect tested inside
           it. Per region, since one analysis may use an atlas mask and a functional ROI at
           once. Required, so a source that does not say still carries the slot, as
-          `extraction_status: not_reported`.
+          `extraction_status: not_reported`. Open vocabulary: write the source's own wording
+          in the field when nothing here fits, because the value is required and a closed
+          range discards the whole region rather than the one unrecognised word.
       region_type:
         in_subset: [model_extracted]
         any_of:
@@ -94,7 +98,8 @@ enums:
     in_subset: [mvp, model_extracted]
     description: >-
       How a region was delimited, which records independence: a region drawn from the study's
-      own prior contrast is not independent of an effect tested inside it.
+      own prior contrast is not independent of an effect tested inside it. Open vocabulary:
+      write the source's own wording in the field when nothing here fits.
     permissible_values:
       atlas:
         in_subset: [mvp, model_extracted]

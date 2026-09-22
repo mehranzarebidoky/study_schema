@@ -182,14 +182,8 @@ classes:
           entry is a condition. Unset when `medical_condition` was never extracted -- that
           is not a healthy cohort, it is an unread one.
 
-          It was `model_extracted` until testing showed a description could not carry the
-          distinction. Asked directly, models answer with the source's wording: over 1,817
-          records 168 groups said True beside a real diagnosis, 132 of them
-          `value_source: reported`, because the addiction and obesity literature says
-          "healthy" to mean free of comorbidity. Rewriting this description to say otherwise
-          moved 2 of 5 test cases, and left `is_healthy=True` next to
-          `medical_condition=[obesity]` untouched. Deriving it removes the question instead
-          of rephrasing it.
+          Derived rather than asked because the source's own wording does not settle it: the
+          addiction and obesity literature says "healthy" to mean free of comorbidity.
       population_characteristics:
         in_subset: [mvp, model_extracted]
         range: string
@@ -223,8 +217,7 @@ classes:
           which is where a clinician would look.
 
           What was screened out is not a characteristic. "Excluding caffeine" in an exclusion
-          list says nothing about caffeine use in the cohort, and `exclusion_criteria` is
-          where these traits used to land.
+          list says nothing about caffeine use in the cohort.
       other_characteristics:
         in_subset: [mvp, deterministic]
         range: string
@@ -238,12 +231,9 @@ classes:
 
           **Derived, not extracted.** `pondie.normalization.population_characteristics`
           partitions the extracted list and code writes this side of it, so the slot is
-          never put to a model. It exists because three rewrites of the
-          `population_characteristics` description could not keep these values out by
-          asking -- 24%, then 14%, then 7% of entries were still non-selective, on a
-          sample too small to tell those apart -- and because the alternative to moving
-          them is dropping them, which loses a cohort detail a reader auditing the study
-          wants to see.
+          never put to a model. It exists because the alternative to moving these values is
+          dropping them, which loses a cohort detail a reader auditing the study wants to
+          see.
 
           The partition is by selectivity, not by truth. A value here is not wrong; it is
           a value no query can usefully filter on, which is the only reason it cannot share
@@ -330,10 +320,8 @@ classes:
           A protocol, preprocessing pipeline or analysis "described previously" is a shared
           METHOD and leaves this `recruited`; so does comparing findings to earlier
           literature in the discussion. Only a statement that these same people were
-          scanned, studied or reported before counts. Measured on 150 random papers: the
-          value is decidable from a verbatim sentence in 38 of the 40 non-`recruited` cases,
-          and both errors were this confusion, so the warning is the field's own text rather
-          than a note somewhere else.
+          scanned, studied or reported before counts, and a source that means it normally
+          says so in one sentence.
 
           `recruited` is an assertion and not the absence of one. A meta-analysis excluding
           overlapping samples has to distinguish a study that recruited freshly from one
@@ -342,20 +330,18 @@ classes:
         in_subset: [mvp, model_extracted]
         range: string
         description: >-
-          The dataset name, or the prior publication as the source cites it -- `Doehrmann et
-          al., 2013`, `Bryant et al. [17]`, `NCT01281228`. Present in 36 of 40 measured
-          cases. Without it the overlap is known and not actionable: deciding whether two
+          The dataset name, or the prior publication as the source cites it: an author-year
+          citation, a bracketed reference number, or a trial registration number, copied as
+          written. Without it the overlap is known but not actionable -- deciding whether two
           papers are one independent sample needs the identity of the other one.
       sample_overlap_count:
         in_subset: [model_extracted]
         range: integer
         minimum_value: 0
         description: >-
-          How many of this group were in that prior report, when the source says. Stated in
-          about half of measured cases ("GM volume data from 14 of these 21 PTSD
-          participants has been previously reported"). It is the difference between two
-          papers being one sample and their sharing part of one, which is the difference
-          between dropping a study and down-weighting it.
+          How many of this group were in that prior report, when the source says so. It is
+          the difference between two papers being one sample and their sharing part of one,
+          which is the difference between dropping a study and down-weighting it.
 
   CategoryDistribution:
     description: >-

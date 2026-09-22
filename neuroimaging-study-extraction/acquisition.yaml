@@ -108,10 +108,9 @@ classes:
       modality:
         range: ExtractedModality
         required: true
-        description: >-
-          Imaging or recording modality, from the closed Modality vocabulary. The value also
-          names the class holding this acquisition's modality-specific parameters, through
-          that value's `instantiates`.
+        description: |-
+          Imaging or recording modality. A value in the Modality vocabulary also names the class holding this acquisition's modality-specific parameters, through that value's `instantiates`.
+          Open vocabulary: write the source's own wording in the field when nothing here fits, because the value is required and a closed range discarded the whole acquisition over one unrecognised word. Only a vocabulary value carries an `instantiates`, so an acquisition outside it resolves to the base class until normalization maps the wording back on -- which is why `acquisition_type` is derived rather than extracted, and why an unmapped modality is worth reporting.
       acquisition_duration_seconds:
         range: ExtractedNumber
         description: >-
@@ -302,7 +301,11 @@ classes:
         range: BrainCoverage
   ExtractedModality:
     is_a: ExtractedValue
-    description: An ExtractedValue whose value is Modality.
+    description: >-
+      An ExtractedValue whose value is Modality, or the source's own wording when the vocabulary
+      does not cover it.
     slot_usage:
       value:
-        range: Modality
+        any_of:
+          - range: Modality
+          - range: string

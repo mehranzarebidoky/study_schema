@@ -34,11 +34,19 @@ classes:
           modality value's `instantiates`, never extracted.
       modality:
         in_subset: [mvp, model_extracted]
-        range: Modality
+        any_of:
+          - range: Modality
+          - range: string
         required: true
         description: >-
-          Imaging or recording modality, from the closed Modality vocabulary. The value also names the class
-          holding this acquisition's modality-specific parameters, through that value's `instantiates`.
+          Imaging or recording modality. A value in the Modality vocabulary also names the class holding
+          this acquisition's modality-specific parameters, through that value's `instantiates`.
+
+          Open vocabulary: write the source's own wording in the field when nothing here fits, because the
+          value is required and a closed range would discard the whole acquisition over one unrecognised word.
+          Only a vocabulary value carries an `instantiates`, so an acquisition outside it resolves to the
+          base class until normalization maps the wording back on -- which is why `acquisition_type` is
+          derived rather than extracted, and why an unmapped modality is worth reporting.
       acquisition_duration_seconds:
         in_subset: [mvp, model_extracted]
         range: float
@@ -67,17 +75,14 @@ classes:
           whole-head acquisition is the reverse. Never infer this from either of those.
 
           It describes the volume behind the REPORTED results. A scan that clipped a
-          structure in some participants who were then excluded is `whole_brain`, because
-          the analysed volume was not clipped -- measured on a real case, `26535944`
-          dropped 4 subjects whose scans missed the cerebellum, and calling that `partial`
-          would say the opposite of what the results rest on.
+          structure in participants who were then excluded is `whole_brain`, because the
+          analysed volume was not clipped; calling it `partial` would say the opposite of
+          what the results rest on.
 
-          A field of view in millimetres is not by itself a statement of coverage. Where
-          only the geometry is given, the value is an inference and `value_source` records
-          it as one: 23027680 was read as `whole_brain` from "160-180 1.2-mm contiguous
-          coronal slices" and nothing else. Stated in some form by about half of 903 corpus
-          papers; a named excluded structure appears in roughly 1%, which is why there is
-          no list of them and the evidence span carries the rare detail.
+          A field of view or slice prescription in millimetres is not by itself a statement
+          of coverage. Where only the geometry is given, the value is an inference and
+          `value_source` records it as one. Which structure a partial volume missed is not a
+          field of its own -- the evidence span carries that detail.
 
   MRI:
     is_a: Acquisition

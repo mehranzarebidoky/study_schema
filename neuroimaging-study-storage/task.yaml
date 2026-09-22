@@ -49,10 +49,12 @@ classes:
           The conditions this task was made of. These are the different states/modes of the task.
       design_type:
         in_subset: [mvp, model_extracted]
-        range: string
+        any_of:
+          - range: DesignType
+          - range: string
         description: >-
-          Design form such as event-related, block, mixed, naturalistic, or continuous with no
-          modelled events (such as resting state).
+          How the task's events were modelled in time. Open vocabulary: write the source's
+          own wording in the field when nothing here fits.
       acquisitions:
         in_subset: [mvp, model_extracted]
         range: Acquisition
@@ -69,13 +71,25 @@ classes:
         in_subset: [model_extracted]
         range: string
         description: Task- or paradigm-specific instructions given to participants.
+      references:
+        in_subset: [mvp, model_extracted]
+        range: string
+        multivalued: true
+        description: >-
+          Works the source cites for this task, exactly as it writes them: an author-year
+          citation or a bracketed reference number, kept in the source's own punctuation.
+          Copy the in-text citation; do not resolve, expand or look it up.
+
+          Multivalued -- a task may cite the paradigm's origin, an adaptation, and the
+          stimulus set separately. Empty when the source cites nothing for the task.
       stimuli:
         in_subset: [model_extracted]
         range: string
+        multivalued: true
         description: >-
           The materials presented to participants, in the source's own terms -- the stimulus
-          set, its name, how many items. `stimulus_modality` carries the sensory channel;
-          this carries what the stimuli actually were.
+          set, its name, how many items. One entry per distinct material;
+          `stimulus_modality` carries the sensory channel.
       stimulus_modality:
         in_subset: [mvp, model_extracted]
         any_of:
@@ -89,9 +103,7 @@ classes:
           Often not stated in those words: a source naming IAPS, NimStim, Ekman faces or
           film clips has said `visual` without using the word. Inferring it from such a cue
           is intended, and the cue is what belongs in the evidence -- not the whole methods
-          section. Screening criteria ask about stimulus modality routinely ("the emotional
-          stimuli are VISUAL"), and against a free-text `stimuli` field that question cannot
-          be answered.
+          section.
       response_modality:
         in_subset: [mvp, model_extracted]
         any_of:
@@ -126,6 +138,18 @@ classes:
         required: true
         description: Short condition label that distinguishes the condition from other task periods or modeled
           effects.
+      stimulus_content:
+        in_subset: [mvp, model_extracted]
+        range: string
+        multivalued: true
+        description: >-
+          What this condition's stimuli were about -- their category, not the channel
+          (`Task.stimulus_modality`) or the materials (`Task.stimuli`): a cigarette
+          photograph is `cigarettes`. Faces, scenes, words, tones, music, food, money --
+          examples, not a vocabulary.
+
+          Leave unset where the stimulus does not distinguish this condition from the
+          others: every n-back load level shows the same letters.
       condition_kind:
         in_subset: [mvp, model_extracted]
         any_of:
@@ -133,9 +157,8 @@ classes:
           - range: string
         description: >-
           What kind of state this was: an active task state, a rest or fixation period, or a
-          state the source calls a control or neutral condition. Asked as its own field
-          because it was asked for in prose before and arrived in under half of conditions,
-          and because a consumer that has to read it out of a description cannot rely on it.
+          state the source calls a control or neutral condition. A field of its own rather
+          than a phrase in `description`, which a consumer cannot reliably read it out of.
       description:
         in_subset: [mvp, model_extracted]
         range: string
@@ -184,6 +207,36 @@ enums:
           A state the source itself calls a control, neutral, or comparison condition --
           matched to the state of interest on everything but the manipulation. Recorded
           because the source labelled it so, not because a contrast used it that way.
+
+  DesignType:
+    in_subset: [mvp, model_extracted]
+    description: >-
+      How a task's events were modelled in time -- not what the task was or what it showed.
+      Open vocabulary: write the source's own wording in the field when nothing here fits.
+    permissible_values:
+      block:
+        in_subset: [mvp, model_extracted]
+        description: >-
+          Conditions presented in extended runs of like trials and modelled as those runs.
+          Covers `blocked`, `block design` and a randomised or alternating block order:
+          randomisation is how the blocks were sequenced, not a different design.
+      event_related:
+        in_subset: [mvp, model_extracted]
+        description: >-
+          Individual trials modelled as separate events. Rapid, slow and fast variants are
+          this design at different inter-stimulus intervals; write the source's phrase in
+          the field when that distinction matters.
+      mixed:
+        in_subset: [mvp, model_extracted]
+        description: >-
+          Both in one run -- events modelled within blocks that are themselves modelled.
+          Only where the source says it used both, not where a block design happens to have
+          trials.
+      continuous:
+        in_subset: [mvp, model_extracted]
+        description: >-
+          No discrete events modelled: resting state, film or music played through,
+          naturalistic viewing. The task ran continuously and the analysis is of that run.
 
   StimulusModality:
     in_subset: [mvp, model_extracted]
