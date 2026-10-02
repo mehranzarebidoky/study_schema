@@ -516,8 +516,15 @@ point override it:
 So one item in five is mis-described by a per-table or per-passage label, while a set is
 almost always one thing. Most of the per-point disagreements in tables were coordinates of
 tables triage passed but that hold no coordinates at all; the genuine mixed set -- a seed
-listed as a row of its own connectivity results -- is 1.3% of sets, which is why a mixed set
-is split rather than given a per-point role.
+listed as a row of its own connectivity results -- is 1.3% of sets, about 0.7% of points.
+
+**A mixed set takes its dominant role, and that error is accepted.** The sets are the table
+parse's groups, made before any role is assigned and keyed by ordinal, so splitting one
+would mean renumbering or appending keys the parse never made. The cost of not splitting is
+bounded and one-directional: a seed recorded as one more point of the result set it was
+printed in. No result is lost. The sets that carry it have a recognisable signature -- a
+connectivity result whose analysis names a seed -- so they can be found and split later
+without redoing anything else.
 
 **The five roles.** `result` (with `result_kind`), `anchor` (with `anchor_kind`),
 `localization`, `reference` and `display`, from neurostuff/ns-pond-ingestion-workflow#3.

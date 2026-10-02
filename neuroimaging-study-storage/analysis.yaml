@@ -1274,8 +1274,11 @@ classes:
       tables; this records their role and links them to what they belong to: the analysis a
       result reports, the regions an anchor locates.
 
-      A set has one role. The rare set that mixes roles -- a connectivity results table that
-      lists its own seed as a row -- is split, so that the seed is an anchor set of its own.
+      A set has one role: its dominant one. The groups come from the table parse, which splits
+      a table by what was tested rather than by what each row is for, so a set can mix roles
+      -- a connectivity results table that lists its own seed as a row. Such a set keeps the
+      role of most of its points, and the odd point takes that role with it. This is a known
+      error, about 1.3% of sets, accepted rather than splitting the parse's groups.
     attributes:
       id:
         in_subset: [mvp, deterministic]
