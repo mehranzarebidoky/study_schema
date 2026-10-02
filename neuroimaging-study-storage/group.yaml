@@ -128,6 +128,18 @@ classes:
         range: string
         description: Unit used for age summaries, normally years but potentially months, weeks, or gestational
           weeks.
+      age_unit_normalized:
+        in_subset: [deterministic]
+        range: AgeUnit
+        description: >-
+          `age_unit` folded onto a fixed set. **Derived, not extracted**:
+          `pondie.normalization.age_unit` sets it from the source's own wording, which is
+          kept in `age_unit`.
+
+          Without it the age fields are not comparable across studies: `6` under "months"
+          and `6` under "years" are the same number, and a filter on age reads every
+          neonatal and infant cohort wrong. `UNKNOWN` where the wording does not say --
+          not `years`, because assuming the common case is what makes that error silent.
       sex_distribution:
         in_subset: [mvp, model_extracted]
         range: CategoryDistribution
@@ -357,6 +369,22 @@ classes:
           The distribution bucket counted by this entry, labelled as the study writes it
           and not normalized to any external scheme: `female`, `left-handed`, `Hispanic or
           Latino`.
+      category_normalized:
+        in_subset: [deterministic]
+        range: string
+        description: >-
+          `category` folded onto the answer set for the distribution this entry belongs to.
+          **Derived, not extracted**: `pondie.normalization.sex_distribution` and
+          `pondie.normalization.handedness_distribution` set it, and `category` keeps the
+          study's own wording.
+
+          The answer set depends on the slot, which is why the range is open here rather
+          than an enum: sex folds to MALE/FEMALE/OTHER/UNKNOWN, handedness to
+          RIGHT/LEFT/AMBIDEXTROUS/OTHER/UNKNOWN. A distribution with no normalizer --
+          gender, race, ethnicity -- leaves this unset rather than guessing.
+
+          Unset is not UNKNOWN. UNKNOWN says a normalizer read the wording and could not
+          place it, which is a wording worth a rule; unset says none ran.
       count:
         in_subset: [mvp, model_extracted]
         range: integer
@@ -382,6 +410,28 @@ classes:
           handedness inventory, or a self-report question's answer set.
 
 enums:
+
+  AgeUnit:
+    in_subset: [deterministic]
+    description: >-
+      The unit the age summaries are in, folded from the source's wording. Closed, because
+      the point of the field is that two studies' ages are comparable, and an open range
+      would put that back where it started.
+    permissible_values:
+      years:
+        description: The default in adult and most developmental work.
+      months:
+        description: Infant and toddler cohorts, and some clinical follow-up.
+      weeks:
+        description: Postnatal weeks.
+      gestational_weeks:
+        description: >-
+          Weeks since the last menstrual period, not since birth. Kept apart from `weeks`
+          because the two count from different zeros and a preterm cohort reports both.
+      UNKNOWN:
+        description: >-
+          The wording does not say. Distinct from `years`: assuming the common case is
+          what makes a misread infant cohort silent.
 
   SampleSource:
     in_subset: [mvp, model_extracted]
