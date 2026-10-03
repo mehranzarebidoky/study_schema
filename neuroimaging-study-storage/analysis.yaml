@@ -80,6 +80,16 @@ classes:
           Results and Discussion, verbatim or minimally cleaned. Always source-grounded, and
           the counterpart of `definition`: that field is the Methods-side statement of what was
           tested, this one is the Results/Discussion-side statement of what came of it.
+      outcome:
+        in_subset: [mvp, model_extracted]
+        range: AnalysisOutcome
+        description: >-
+          Whether anything survived the threshold this analysis was tested at: a cluster, a
+          peak, a significant region. The answer to "did this contrast find anything", which
+          `Effect.cells` cannot give -- a cell's direction is the sign of the contrast that
+          was tested, and is written the same whether the test found an effect or not.
+          Meta-analyses exclude null effects and pool only analyses that reported foci, so a
+          tested-and-null contrast and a reported effect must not extract to the same record.
       spatial_scope:
         in_subset: [mvp, model_extracted]
         any_of:

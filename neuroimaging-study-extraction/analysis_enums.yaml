@@ -66,6 +66,19 @@ enums:
         description: Inference restricted to one or more regions of interest.
       searchlight:
         description: Moving-window multivariate analysis across the whole search space.
+  AnalysisOutcome:
+    description: >-
+      Whether the tested effect produced any finding at the threshold the source applied.
+      Closed: the two are the only answers, and a source that does not say takes `not_reported`
+      rather than a third value.
+    permissible_values:
+      significant_effect:
+        description: At least one cluster, peak, region or test survived the source's own
+          threshold.
+      no_significant_effect:
+        description: >-
+          The effect was tested and nothing survived the source's own threshold -- "no significant
+          differences were found", a table row reading "none", a null correlation.
   SpatialUnit:
     description: >-
       The element an analysis was carried out over: the surface-versus-volume distinction
@@ -677,6 +690,12 @@ classes:
         any_of:
           - range: SpatialScope
           - range: string
+  ExtractedAnalysisOutcome:
+    is_a: ExtractedValue
+    description: An ExtractedValue whose value is AnalysisOutcome.
+    slot_usage:
+      value:
+        range: AnalysisOutcome
   ExtractedSpatialUnit:
     is_a: ExtractedValue
     description: >-

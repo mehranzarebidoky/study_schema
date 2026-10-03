@@ -90,6 +90,24 @@ enums:
         in_subset: [mvp, model_extracted]
         description: Moving-window multivariate analysis across the whole search space.
 
+  AnalysisOutcome:
+    in_subset: [mvp, model_extracted]
+    description: >-
+      Whether the tested effect produced any finding at the threshold the source applied.
+      Closed: the two are the only answers, and a source that does not say takes
+      `not_reported` rather than a third value.
+    permissible_values:
+      significant_effect:
+        in_subset: [mvp, model_extracted]
+        description: >-
+          At least one cluster, peak, region or test survived the source's own threshold.
+      no_significant_effect:
+        in_subset: [mvp, model_extracted]
+        description: >-
+          The effect was tested and nothing survived the source's own threshold -- "no
+          significant differences were found", a table row reading "none", a null
+          correlation.
+
   SpatialUnit:
     in_subset: [mvp, model_extracted]
     description: >-
