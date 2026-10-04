@@ -530,8 +530,8 @@ classes:
 
           Required exactly when the referenced term declares levels. A slope declares none, and
           its cell names none. A product column declares none either, but a signed cell on one
-          may name a level of its categorical component: the cohort or condition whose slope
-          has the cell's sign, relative to the component's other levels. "Maltreatment was
+          crossing a factor with a continuous term may name a level of the factor: the cohort
+          or condition whose slope has the cell's sign, relative to the factor's other levels. "Maltreatment was
           negatively associated with rACC activation in the PTSD group, but not in controls" is
           `direction: negative` with `level: PTSD group`. Without the level the sign has no
           reference, since which level the difference is taken from is a coding choice.
@@ -914,9 +914,10 @@ classes:
           A product of terms that are all categorical and all crossed is legal but decides nothing,
           the crossed cells already saying what it says, and is flagged for review.
 
-          A product column declares no `levels` of its own; a signed cell on it may name a level
-          of a categorical component, saying whose slope the sign describes. Such a column is not
-          a covariate of a contrast whose cells name all of its components.
+          A product column declares no `levels` of its own; a signed cell on one with a
+          continuous component may name a level of the factor, saying whose slope the sign
+          describes. Such a column is not a covariate of a contrast whose cells name all of its
+          components.
       unit:
         in_subset: [mvp, model_extracted]
         range: string

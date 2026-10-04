@@ -320,8 +320,9 @@ have to be checked in code:
    nothing on the model is a structural error rather than a new level to create. Absent for a
    continuous term: a level of a slope is not a thing, and a continuous term carrying the effect
    makes it a `parametric_modulation` or a `cross_subject_regression` by step 1 of the derivation
-   rather than an axis to count. The one exception is a signed cell on a product column, which may
-   name a level of a categorical component: whose slope the sign describes (`Cell.level`).
+   rather than an axis to count. The one exception is a signed cell on a product column crossing a
+   factor with a continuous term, which may name a level of the factor: whose slope the sign
+   describes (`Cell.level`).
 4. **`Effect.mediation.mediator` must reference a `ModelTerm` of this analysis's model** — invariant 2 again, for the one other term pointer, and over the same chain.
 5. **`ModelEstimation.inputs_from` must be acyclic.** A model fitted on its own output is not a
    stage order. Every consumer of the term list walks this chain, so a cycle is a hang as well

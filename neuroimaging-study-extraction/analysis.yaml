@@ -335,7 +335,7 @@ classes:
         range: ExtractedString
         description: |-
           The level represented by this cell, matching a `FactorLevel.level` on the referenced ModelTerm. The model states the level vocabulary; this field only identifies the level placed on this side of the comparison.
-          Required exactly when the referenced term declares levels. A slope declares none, and its cell names none. A product column declares none either, but a signed cell on one may name a level of its categorical component: the cohort or condition whose slope has the cell's sign, relative to the component's other levels. "Maltreatment was negatively associated with rACC activation in the PTSD group, but not in controls" is `direction: negative` with `level: PTSD group`. Without the level the sign has no reference, since which level the difference is taken from is a coding choice.
+          Required exactly when the referenced term declares levels. A slope declares none, and its cell names none. A product column declares none either, but a signed cell on one crossing a factor with a continuous term may name a level of the factor: the cohort or condition whose slope has the cell's sign, relative to the factor's other levels. "Maltreatment was negatively associated with rACC activation in the PTSD group, but not in controls" is `direction: negative` with `level: PTSD group`. Without the level the sign has no reference, since which level the difference is taken from is a coding choice.
       direction:
         range: ExtractedDirection
         required: true
@@ -559,7 +559,7 @@ classes:
           The terms it may name are those of this model and of the stages it reaches through `inputs_from`, which is how a group stage crosses a cohort factor with a first-level condition: the product column is declared where it was fitted and names the lower stage's column directly.
           A crossing of two factors is normally read off the cells, since a factor compared against itself carries a positive cell and a negative one. A continuous term has no levels and so cannot be crossed that way, which makes this slot the only record of a moderation such as `age x group`; the derived kind reads it before `variation_level`.
           A product of terms that are all categorical and all crossed is legal but decides nothing, the crossed cells already saying what it says, and is flagged for review.
-          A product column declares no `levels` of its own; a signed cell on it may name a level of a categorical component, saying whose slope the sign describes. Such a column is not a covariate of a contrast whose cells name all of its components.
+          A product column declares no `levels` of its own; a signed cell on one with a continuous component may name a level of the factor, saying whose slope the sign describes. Such a column is not a covariate of a contrast whose cells name all of its components.
       unit:
         range: ExtractedString
         description: >-
