@@ -13,6 +13,7 @@ default_range: string
 classes:
 
   Acquisition:
+    abstract: true
     description: >-
       A modality-agnostic protocol used to acquire neuroimaging or associated physiological data, holding only what
       every modality has in common. One Acquisition carries one modality: simultaneous recordings such as EEG+fMRI
