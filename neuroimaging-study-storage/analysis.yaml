@@ -528,9 +528,13 @@ classes:
           ModelTerm. The model states the level vocabulary; this field only identifies the level
           placed on this side of the comparison.
 
-          Required exactly when the referenced term declares levels, and unset when it does not.
-          A factor declares levels; a slope and a product column declare none, and their cells
-          name none.
+          Required exactly when the referenced term declares levels. A slope declares none, and
+          its cell names none. A product column declares none either, but a signed cell on one
+          may name a level of its categorical component: the cohort or condition whose slope
+          has the cell's sign, relative to the component's other levels. "Maltreatment was
+          negatively associated with rACC activation in the PTSD group, but not in controls" is
+          `direction: negative` with `level: PTSD group`. Without the level the sign has no
+          reference, since which level the difference is taken from is a coding choice.
       direction:
         in_subset: [mvp, model_extracted]
         range: Direction
@@ -538,7 +542,8 @@ classes:
         description: >-
           How this cell entered the contrast: the weight's sign for a categorical level, the
           fitted coefficient's sign for a continuous term, or the interaction coefficient's sign
-          for a product column.
+          for a product column -- read as the named level's slope relative to the others when
+          the cell names one (`level`).
 
           Signs, never numeric weights. For an ordered comparison mark the extremes `positive`
           and `negative`, leave the levels in between out of `cells` -- absence is the zero
@@ -909,7 +914,8 @@ classes:
           A product of terms that are all categorical and all crossed is legal but decides nothing,
           the crossed cells already saying what it says, and is flagged for review.
 
-          A product column declares no `levels`, so a cell on it names none. Such a column is not
+          A product column declares no `levels` of its own; a signed cell on it may name a level
+          of a categorical component, saying whose slope the sign describes. Such a column is not
           a covariate of a contrast whose cells name all of its components.
       unit:
         in_subset: [mvp, model_extracted]
