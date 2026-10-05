@@ -403,12 +403,18 @@ enums:
       preregistered:
         in_subset: [mvp, model_extracted]
         description: >-
-          The source states the analysis was planned before the data were seen. A public
-          registration is the strongest form -- a registry entry, a trial identifier, a
-          registered report -- but a stated protocol or analysis plan counts, since what
-          matters for pooling is that the contrast was fixed in advance rather than where
-          it was deposited. The claim must be the source's, and a registration covering the
-          study does not by itself cover every contrast reported from it.
+          The analysis was fixed in advance in a record outside the paper: a registry entry,
+          a trial identifier, a registered report, a published protocol or analysis plan.
+          The claim must be the source's, and a registration covering the study does not by
+          itself cover every contrast reported from it.
+      planned:
+        in_subset: [mvp, model_extracted]
+        description: >-
+          The paper itself says the analysis was planned before the data were seen -- a
+          planned contrast, an a priori hypothesis it tests, a confirmatory or
+          hypothesis-driven analysis -- with no registration or protocol behind the claim.
+          Fixed in advance by the authors' account, which a reader cannot check the way a
+          registration can.
       exploratory:
         in_subset: [mvp, model_extracted]
         description: >-
