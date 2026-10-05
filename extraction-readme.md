@@ -265,6 +265,11 @@ that sign is missing from the page, so the slot takes `not_reported`. A corollar
 level — on a slope or a product column — cannot sit on both sides of anything, so an undirected test
 of such a column is `undirected`, never `held`.
 
+**A null result is not an undirected test.** A t or z test that found nothing still had a sign:
+"no significant difference between the groups" leaves both group cells `not_reported` and the
+effect a `contrast`, and "no correlation with symptom severity" leaves the slope's cell
+`not_reported`. A cell is `undirected` only when the test was an F or χ².
+
 The two questions also settle the **moderation** whose simple slopes differ by moderator level. A
 single-degree-of-freedom interaction coefficient has a sign — that the decline was steeper in
 patients *is* the sign — so a paper that reports the diverging slopes without printing it has

@@ -86,7 +86,7 @@ classes:
         preconditions:
           slot_conditions:
             name:
-              pattern: '(?i)^\s*(bi|bi-)?(lateral\s+)?(whole\s+)?(gr[ae]y|white)[\s-]*matter\s*(mask|volume|density|concentration|images?)?\s*$'
+              pattern: '(?i)^\s*(bi|bi-)?(lateral\s+)?(whole\s+)?(gr[ae]y|white)[\s-]*matter\s*(mask|volume|density|concentration|images?|regions?)?\s*$'
         postconditions:
           slot_conditions:
             name:
