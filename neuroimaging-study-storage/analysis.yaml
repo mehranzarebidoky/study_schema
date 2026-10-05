@@ -80,6 +80,16 @@ classes:
           Results and Discussion, verbatim or minimally cleaned. Always source-grounded, and
           the counterpart of `definition`: that field is the Methods-side statement of what was
           tested, this one is the Results/Discussion-side statement of what came of it.
+      outcome:
+        in_subset: [mvp, model_extracted]
+        range: AnalysisOutcome
+        description: >-
+          Whether anything survived the threshold this analysis was tested at: a cluster, a
+          peak, a significant region. The answer to "did this contrast find anything", which
+          `Effect.cells` cannot give -- a cell's direction is the sign of the contrast that
+          was tested, and is written the same whether the test found an effect or not.
+          Meta-analyses exclude null effects and pool only analyses that reported foci, so a
+          tested-and-null contrast and a reported effect must not extract to the same record.
       spatial_scope:
         in_subset: [mvp, model_extracted]
         any_of:
@@ -518,9 +528,13 @@ classes:
           ModelTerm. The model states the level vocabulary; this field only identifies the level
           placed on this side of the comparison.
 
-          Required exactly when the referenced term declares levels, and unset when it does not.
-          A factor declares levels; a slope and a product column declare none, and their cells
-          name none.
+          Required exactly when the referenced term declares levels. A slope declares none, and
+          its cell names none. A product column declares none either, but a signed cell on one
+          crossing a factor with a continuous term may name a level of the factor: the cohort
+          or condition whose slope has the cell's sign, relative to the factor's other levels. "Maltreatment was
+          negatively associated with rACC activation in the PTSD group, but not in controls" is
+          `direction: negative` with `level: PTSD group`. Without the level the sign has no
+          reference, since which level the difference is taken from is a coding choice.
       direction:
         in_subset: [mvp, model_extracted]
         range: Direction
@@ -528,7 +542,8 @@ classes:
         description: >-
           How this cell entered the contrast: the weight's sign for a categorical level, the
           fitted coefficient's sign for a continuous term, or the interaction coefficient's sign
-          for a product column.
+          for a product column -- read as the named level's slope relative to the others when
+          the cell names one (`level`).
 
           Signs, never numeric weights. For an ordered comparison mark the extremes `positive`
           and `negative`, leave the levels in between out of `cells` -- absence is the zero
@@ -899,8 +914,10 @@ classes:
           A product of terms that are all categorical and all crossed is legal but decides nothing,
           the crossed cells already saying what it says, and is flagged for review.
 
-          A product column declares no `levels`, so a cell on it names none. Such a column is not
-          a covariate of a contrast whose cells name all of its components.
+          A product column declares no `levels` of its own; a signed cell on one with a
+          continuous component may name a level of the factor, saying whose slope the sign
+          describes. Such a column is not a covariate of a contrast whose cells name all of its
+          components.
       unit:
         in_subset: [mvp, model_extracted]
         range: string

@@ -249,6 +249,12 @@ classes:
         description: '`age_unit` folded onto years / months / weeks / gestational_weeks /
           UNKNOWN by `pondie.normalization.age_unit`, never extracted. The source''s own wording
           stays in `age_unit`.'
+      other_characteristics:
+        range: ExtractedStringList
+        description: >-
+          Cohort traits moved out of `population_characteristics` because every plausible
+          cohort could carry them. Written by `pondie.normalization.population_characteristics`,
+          never extracted.
   CategoryDistribution:
     description: >-
       One category in an aggregate participant distribution. Labels are free text, kept in

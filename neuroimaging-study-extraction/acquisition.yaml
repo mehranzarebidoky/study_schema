@@ -88,6 +88,7 @@ enums:
           recording analysed on its own. OtherModality holds both its label and its parameters.
 classes:
   Acquisition:
+    abstract: true
     description: >-
       A modality-agnostic protocol used to acquire neuroimaging or associated physiological
       data, holding only what every modality has in common. One Acquisition carries one modality:
