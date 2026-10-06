@@ -277,6 +277,16 @@ classes:
           in DrugOrBehaviour. If the group includes more than one substance
           or addictive behaviour, use `Multiple`. Use `Healthy` for healthy
           control groups.
+      group_type:
+        in_subset: [mvp, model_extracted]
+        range: GroupType
+        description: >-
+          Standardized classification of the participant group based on
+          addiction status and treatment/abstinence status. Select the
+          category that best represents the primary and most comprehensive
+          group represented in the study.
+          
+
       diagnostic_system:
         in_subset: [mvp, model_extracted]
         range: string
@@ -458,19 +468,34 @@ enums:
         description: Healthy control participants with no addiction.
 
 
-  AddictionGroupStatus:
-    description: Standard addiction and treatment status categories.
+  GroupType:
+    in_subset: [mvp, model_extracted]
+    description: >-
+      Standardized participant-group classification for addiction-related
+      studies.
     permissible_values:
       healthy:
-        description: Participants with no addiction / healthy controls.
+        description: >-
+          Participants with no addiction or healthy control participants.
+
       User:
-        description: Substance users without a clinical addiction diagnosis.
+        description: >-
+          Substance users without a clinical addiction diagnosis.
+
       Ad_Treated:
-        description: Participants with addiction receiving treatment or recruited from treatment settings.
+        description: >-
+          Participants with addiction who are receiving treatment or were
+          recruited from a treatment setting.
+
       AD-Untreated:
-        description: Participants with addiction not currently receiving treatment.
+        description: >-
+          Participants with addiction who are not currently receiving treatment.
+
       LTA:
-        description: Long-term abstinent participants with a history of SUD who are currently abstinent and not in treatment.
+        description: >-
+          Long-term abstinent participants with a history of substance use
+          disorder who are currently abstinent and not receiving treatment.
+
 
 
   AgeUnit:
