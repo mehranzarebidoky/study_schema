@@ -153,6 +153,23 @@ classes:
           and units, for example 24 h or six weeks.
 
 enums:
+  MainDesignType:
+    description: >-
+      Standardized fMRI / neuroimaging experimental design type.
+    permissible_values:
+      Block:
+        description: >-
+          Block design (boxcar). Note: In cases where the cue is presented for a
+          relatively long period and has a dynamic nature, such as a video, film clip,
+          or script/guided imagery, it MUST be classified as Block, even if the article
+          describes the design using different terminology.
+      Event-Related:
+        description: >-
+          Event-related design (rapid or jittered discrete trials with brief stimulus
+          presentations).
+      NS:
+        description: >-
+          Not Specified (NS) / Not reported by the authors in the text.
 
   Allocation:
     in_subset: [mvp, model_extracted]
