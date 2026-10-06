@@ -118,7 +118,17 @@ classes:
         description: >-
           Duration of the task inside the scanner in seconds for one scanning session.
           Recorded as reported value in seconds, estimated with 'EST: <value>', or 'NS' if not reliably determinable.
-
+      combined_task_category:
+        in_subset: [mvp, model_extracted]
+        multivalued: true
+        any_of:
+          - range: CombinedTaskCategory
+          - range: string
+        description: >-
+          The standardized category of any additional cognitive or behavioral task administered 
+          alongside the primary Drug Cue Reactivity (FDCR) paradigm. Do not use this field to 
+          classify the FDCR task itself; it is intended exclusively to capture secondary or 
+          combined tasks performed concurrently within the same scanning session.
 
   Condition:
     description: >-
@@ -348,3 +358,22 @@ enums:
       mixed:
         description: >-
           More than one stimulus type is used in the task.
+  CombinedTaskCategory:
+    permissible_values:
+      working_memory:
+        description: Working Memory
+      perception:
+        description: Perception
+      interference_resolution:
+        description: Interference Resolution
+      decision_reward:
+        description: Decision / Reward
+      attention:
+        description: Attention
+      approach:
+        description: Approach
+      avoidance:
+        description: Avoidance
+      response_inhibition:
+        description: Response Inhibition
+
