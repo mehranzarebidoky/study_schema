@@ -75,6 +75,17 @@ classes:
         inlined_as_list: true
         description: >-
           The occasions on which data were collected.
+      intervention_type:
+        in_subset: [mvp, model_extracted]
+        any_of:
+          - range: InterventionType
+          - range: string
+        description: >-
+          The modality of the study's intervention: behavioural, brain stimulation,
+          neurofeedback, or pharmacological. Use this field to characterize the
+          intervention being studied, not the type of comparator arm, such as placebo,
+          sham, usual care, or no intervention.
+
 
   Arm:
     description: >-
@@ -362,3 +373,15 @@ enums:
           Data were collected on several occasions but nothing was administered, so there is
           no intervention to be relative to. A longitudinal observational study takes this
           value.
+  InterventionType:
+    description: Standardized modalities of study interventions.
+    permissible_values:
+      behavioural:
+        description: A behavioural intervention, such as training, therapy, or exercise.
+      brain_stimulation:
+        description: Brain stimulation, such as TMS, tDCS, tACS, or deep brain stimulation.
+      neurofeedback:
+        description: Neurofeedback training.
+      pharmacological:
+        description: A drug or other pharmacological agent.
+
