@@ -424,25 +424,39 @@ classes:
 
 enums:
 
-  DisorderCategory:
-    description: Allowed standard terms for substances, behaviors, and special categories.
+  DrugOrBehaviour:
+    in_subset: [mvp, model_extracted]
+    description: >-
+      Standardized substance, addictive behaviour, or special category
+      defining the participant group.
     permissible_values:
-      # Substances
       Alcohol:
+        description: Alcohol-related use or addiction.
       Cannabis:
+        description: Cannabis-related use or addiction.
       Cocaine:
+        description: Cocaine-related use or addiction.
       Heroin:
+        description: Heroin-related use or addiction.
       Inhalant:
+        description: Inhalant-related use or addiction.
       Methamphetamine:
+        description: Methamphetamine-related use or addiction.
       Nicotine:
+        description: Nicotine-related use or addiction.
       Opioids:
-      # Behaviors
+        description: Opioid-related use or addiction, excluding heroin when heroin is specifically identified.
       Gambling:
+        description: Gambling-related behavioural addiction.
       Videogaming:
-      # Special Categories
+        description: Videogaming-related behavioural addiction.
       Multiple:
-      description: Participants with more than one substance or behavior category.
+        description: >-
+          More than one substance or addictive behaviour is represented
+          in the primary group.
       Healthy:
+        description: Healthy control participants with no addiction.
+
 
   AddictionGroupStatus:
     description: Standard addiction and treatment status categories.
