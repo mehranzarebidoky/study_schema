@@ -268,14 +268,15 @@ classes:
           for that. Likewise a negated *condition* is normative ("no psychiatric history")
           and a negated *exposure* is not ("no history of smoking" defines the control arm
           of a smoking study).
-      medical_condition:
+      drug_or_behaviour:
         in_subset: [mvp, model_extracted]
-        range: string
-        multivalued: true
+        range: DrugOrBehaviour
         description: >-
-          Medical, neurological, psychiatric, developmental, or physiological
-          condition(s) defining or characterizing the group. List the primary diagnosis
-          and all comorbidities.
+          The primary substance, addictive behaviour, or special category
+          defining the participant group. Use only the standardized terms
+          in DrugOrBehaviour. If the group includes more than one substance
+          or addictive behaviour, use `Multiple`. Use `Healthy` for healthy
+          control groups.
       diagnostic_system:
         in_subset: [mvp, model_extracted]
         range: string
