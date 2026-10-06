@@ -112,6 +112,13 @@ classes:
         range: string
         multivalued: true
         description: Behavioral variables recorded and summaries used to verify task performance.
+      duration_seconds:
+        in_subset: [mvp, model_extracted]
+        range: string # Use string (or any_of: [float, string]) to support plain seconds, "EST: <val>", or "NS"
+        description: >-
+          Duration of the task inside the scanner in seconds for one scanning session.
+          Recorded as reported value in seconds, estimated with 'EST: <value>', or 'NS' if not reliably determinable.
+
 
   Condition:
     description: >-
