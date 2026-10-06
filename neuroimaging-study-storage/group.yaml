@@ -423,6 +423,41 @@ classes:
 
 enums:
 
+  DisorderCategory:
+    description: Allowed standard terms for substances, behaviors, and special categories.
+    permissible_values:
+      # Substances
+      Alcohol:
+      Cannabis:
+      Cocaine:
+      Heroin:
+      Inhalant:
+      Methamphetamine:
+      Nicotine:
+      Opioids:
+      # Behaviors
+      Gambling:
+      Videogaming:
+      # Special Categories
+      Multiple:
+      description: Participants with more than one substance or behavior category.
+      Healthy:
+
+  AddictionGroupStatus:
+    description: Standard addiction and treatment status categories.
+    permissible_values:
+      healthy:
+        description: Participants with no addiction / healthy controls.
+      User:
+        description: Substance users without a clinical addiction diagnosis.
+      Ad_Treated:
+        description: Participants with addiction receiving treatment or recruited from treatment settings.
+      AD-Untreated:
+        description: Participants with addiction not currently receiving treatment.
+      LTA:
+        description: Long-term abstinent participants with a history of SUD who are currently abstinent and not in treatment.
+
+
   AgeUnit:
     in_subset: [deterministic]
     description: >-
@@ -480,3 +515,5 @@ enums:
         in_subset: [mvp, model_extracted]
       mouse:
         in_subset: [mvp, model_extracted]
+  
+
